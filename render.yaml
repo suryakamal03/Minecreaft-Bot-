@@ -1,0 +1,33 @@
+services:
+  - type: worker
+    name: minecraft-bot
+    runtime: node
+    buildCommand: npm ci
+    startCommand: npm start
+    envVars:
+      - key: MC_SERVER_HOST
+        sync: false
+      - key: MC_SERVER_PORT
+        value: "55764"
+      - key: MC_BOT_USERNAME
+        sync: false
+      - key: MC_AUTH
+        value: offline
+      - key: MC_VERSION
+        sync: false
+      - key: RECONNECT_DELAY_MS
+        value: "10000"
+
+  - type: cron
+    name: minecraft-server-healthcheck
+    runtime: node
+    schedule: "*/5 * * * *"
+    buildCommand: npm ci
+    startCommand: npm run healthcheck
+    envVars:
+      - key: MC_SERVER_HOST
+        sync: false
+      - key: MC_SERVER_PORT
+        value: "55764"
+      - key: HEALTHCHECK_TIMEOUT_MS
+        value: "10000"
