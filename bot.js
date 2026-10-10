@@ -1,7 +1,7 @@
 
 require('dotenv').config();
 const http = require('node:http');
-const mineflayer = require('mineflayer');
+const mineflayer = require('@wp2508/mineflayer');
 
 const host = process.env.MC_SERVER_HOST;
 const port = Number(process.env.MC_SERVER_PORT || 25565);
